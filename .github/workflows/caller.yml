@@ -1,0 +1,13 @@
+'on':
+  workflow_dispatch:
+    inputs:
+      server-app-id:
+        description: 'Server App ID (leave empty to use repo variable)'
+        type: string
+        default: ''
+
+jobs:
+  call-reusable:
+    uses: ./.github/workflows/reusable.yml
+    with:
+      server-app-id: ${{ inputs.server-app-id }}

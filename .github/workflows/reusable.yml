@@ -1,0 +1,17 @@
+'on':
+  workflow_call:
+    inputs:
+      server-app-id:
+        type: string
+        default: ''
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      EXPO_PUBLIC_SERVER_APP_ID_A: ${{ inputs.server-app-id != '' && inputs.server-app-id || vars.EXPO_PUBLIC_SERVER_APP_ID }}
+      EXPO_PUBLIC_SERVER_APP_ID_B: ${{ inputs['server-app-id'] != '' && inputs['server-app-id'] || vars.EXPO_PUBLIC_SERVER_APP_ID }}
+    steps:
+      - run: |
+          echo "A=$EXPO_PUBLIC_SERVER_APP_ID_A"
+          echo "B=$EXPO_PUBLIC_SERVER_APP_ID_B"
